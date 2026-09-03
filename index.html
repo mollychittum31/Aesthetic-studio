@@ -13,7 +13,7 @@
             --bg-size: 30px 30px;
             --accent: #d4a373;
             --accent-hover: #ccd5ae;
-            --panel-bg: rgba(255, 255, 255, 0.85);
+            --panel-bg: rgba(255, 255, 255, 0.9);
             --text-color: #4a4a4a;
             --card-border: 1px solid rgba(255, 255, 255, 0.6);
         }
@@ -31,17 +31,13 @@
             color: var(--text-color);
         }
 
-        .main-app {
-            width: 100%; max-width: 1050px; margin: 0 auto;
-        }
+        .main-app { width: 100%; max-width: 1100px; margin: 0 auto; }
 
-        /* Top Bar Control Panel Setup */
         .app-profile-bar {
             display: flex; align-items: center; justify-content: space-between; background: var(--panel-bg);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             padding: 20px 30px; border-radius: 28px; border: var(--card-border); margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            flex-wrap: wrap; gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02); flex-wrap: wrap; gap: 15px;
         }
         
         .profile-left { display: flex; align-items: center; gap: 15px; flex: 1; min-width: 250px; }
@@ -61,50 +57,48 @@
         .search-item { padding: 10px 14px; cursor: pointer; font-size: 0.85rem; text-align: left; transition: all 0.2s; }
         .search-item:hover { background: rgba(0,0,0,0.03); padding-left: 18px; }
 
-        .color-picker-box { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; color: #555; }
-        .color-picker-box input[type="color"] { -webkit-appearance: none; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; background: none; }
-        .color-picker-box input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-        .color-picker-box input[type="color"]::-webkit-color-swatch { border: 2px solid white; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .mood-box { display: flex; gap: 8px; align-items: center; background: rgba(0,0,0,0.02); padding: 8px 16px; border-radius: 16px; font-size: 0.85rem; font-weight: 600; }
+        .mood-btn { background: white; border: 1px solid rgba(0,0,0,0.05); padding: 4px 10px; border-radius: 10px; cursor: pointer; font-size: 0.8rem; }
+        .mood-btn.active { background: var(--accent); color: white; }
 
-        .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
-        @media (max-width: 768px) { .app-grid { grid-template-columns: 1fr; } }
+        .app-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 25px; }
+        @media (max-width: 900px) { .app-grid { grid-template-columns: 1fr; } }
 
         .panel {
             background: var(--panel-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             padding: 30px; border-radius: 32px; border: var(--card-border); box-shadow: 0 15px 35px rgba(0,0,0,0.02);
-            display: flex; flex-direction: column; justify-content: space-between; min-height: 540px;
+            display: flex; flex-direction: column; justify-content: space-between; min-height: 620px;
         }
         .panel h3 { margin-bottom: 15px; font-size: 1.3rem; font-weight: 600; color: #222; border-bottom: 1px dashed rgba(0,0,0,0.08); padding-bottom: 8px; }
 
-        .canvas-view {
+        .photo-lookbook-grid {
             width: 100%; height: 260px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.04); position: relative; overflow: hidden;
             display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px;
             background: white; box-shadow: inset 0 0 20px rgba(0,0,0,0.01); transition: background 0.4s ease;
         }
-        .canvas-view h4 { font-size: 1.3rem; font-weight: 600; z-index: 5; text-align: center; padding: 0 15px; color: #222; }
-        .canvas-view p { font-size: 0.85rem; z-index: 5; background: rgba(255,255,255,0.9); backdrop-filter: blur(5px); padding: 4px 12px; border-radius: 12px; margin-top: 6px; color: #666; font-weight: 500; }
+        .photo-lookbook-grid h4 { font-size: 1.3rem; font-weight: 600; z-index: 5; text-align: center; padding: 0 15px; color: #222; }
+        .photo-lookbook-grid p { font-size: 0.85rem; z-index: 5; background: rgba(255,255,255,0.9); backdrop-filter: blur(5px); padding: 4px 12px; border-radius: 12px; margin-top: 6px; color: #666; font-weight: 500; }
 
-        /* Draggable Sticker elements */
-        .placed-sticker { font-size: 2.5rem; position: absolute; cursor: move; z-index: 10; transform: translate(-50%, -50%); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); }
+        .placed-sticker, .placed-text { position: absolute; cursor: move; z-index: 10; transform: translate(-50%, -50%); }
+        .placed-sticker { font-size: 2.5rem; }
+        .placed-text { background: rgba(255,255,255,0.95); padding: 6px 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; border: 1px dashed var(--accent); white-space: nowrap; color: #222; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
         .sticker-drawer { display: flex; gap: 12px; justify-content: center; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.03); margin-bottom: 10px; }
-        .sticker-btn { font-size: 1.6rem; background: none; border: none; cursor: pointer; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .sticker-btn:hover { transform: scale(1.3) rotate(5deg); }
+        .sticker-btn { font-size: 1.6rem; background: none; border: none; cursor: pointer; transition: transform 0.2s; }
+        .sticker-btn:hover { transform: scale(1.3); }
 
-        .input-row { display: flex; gap: 8px; margin-bottom: 15px; }
+        .input-row { display: flex; gap: 8px; margin-bottom: 12px; }
         .input-row input { flex: 1; border-radius: 14px; border: 1px solid rgba(0,0,0,0.08); padding: 12px; background: rgba(255,255,255,0.7); outline: none; }
         .input-row input:focus { border-color: var(--accent); background: white; }
         .input-row button { background: #222; color: white; border: none; padding: 0 20px; border-radius: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         .input-row button:hover { background: #444; }
 
         .screenshot-btn { width: 100%; background: var(--accent); color: white; border: none; padding: 12px; border-radius: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-        .screenshot-btn:hover { opacity: 0.9; transform: translateY(-1px); }
     </style>
 </head>
 <body>
 
-    <!-- 🏠 UNLOCKED CORE PLATFORM INTERFACE -->
     <div class="main-app">
-        
         <div class="app-profile-bar">
             <div class="profile-left">
                 <div class="profile-avatar" id="appUserAvatar">🩰</div>
@@ -114,23 +108,28 @@
                 </div>
             </div>
             
-            <div class="color-picker-box">
-                <span>Canvas Mix Tint:</span>
-                <input type="color" id="tintColorPicker" value="#ffffff">
+            <div class="mood-box">
+                <span>Today's Mood:</span>
+                <button class="mood-btn active" data-mood="cozy">🧸 Cozy</button>
+                <button class="mood-btn" data-mood="happy">🌸 Happy</button>
+                <button class="mood-btn" data-mood="tired">🎧 Tired</button>
             </div>
         </div>
 
         <div class="app-grid">
-            <!-- DESIGN PANEL 1: MOODBOARD LOOKBOOK -->
             <div class="panel">
                 <div>
-                    <h3>👚 Creative Lookbook Canvas</h3>
+                    <h3>👚 Custom Lookbook Designer</h3>
                     <div class="input-row">
-                        <input type="text" id="styleQueryInput" placeholder="Enter look description (e.g. lace trim midi dress)...">
+                        <input type="text" id="styleQueryInput" placeholder="Enter outfit look description...">
                         <button id="generateLookBtn">Generate</button>
                     </div>
+                    <div class="input-row">
+                        <input type="text" id="quoteInput" placeholder="Type a custom quote text stamp...">
+                        <button id="stampTextBtn" style="background: #555;">Stamp Text</button>
+                    </div>
 
-                    <div class="canvas-view" id="lookbookCanvas" style="background: linear-gradient(135deg, #ffccd5, #fff0f3);">
+                    <div class="photo-lookbook-grid" id="lookbookCanvas" style="background: linear-gradient(135deg, #ffccd5, #fff0f3);">
                         <h4 id="canvasMainTitle">Style Board Canvas</h4>
                         <p id="canvasSubtitle">Item updates will display here.</p>
                     </div>
@@ -148,7 +147,6 @@
                 </div>
             </div>
 
-            <!-- DESIGN PANEL 2: SAFE AI DECOR DESIGNER -->
             <div class="panel">
                 <div>
                     <h3>🏠 AI Interior Modeller</h3>
@@ -165,4 +163,3 @@
 
                 <div style="background: rgba(0,0,0,0.01); padding:15px; border-radius:18px; text-align:center; border: 1px dashed rgba(0,0,0,0.06);">
                     <span style="font-size:0.8rem; font-weight:600; opacity:0.6; text-transform:uppercase; letter-spacing:0.5px;">Bargain Est. Cost:</span>
-
